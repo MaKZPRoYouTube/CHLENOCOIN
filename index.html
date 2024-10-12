@@ -3,9 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моя страница</title>
+    <title>Hamster Combat Clone</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #222;
+            padding: 10px;
+            text-align: center;
+        }
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #444;
+        }
+        .health-bar, .mana-bar {
+            width: 45%;
+            height: 20px;
+            background-color: #555;
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        .character {
+            width: 150px;
+            height: 150px;
+            background-color: #888;
+            margin: 10px;
+        }
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+        }
+    </style>
 </head>
 <body>
-    <button onclick="alert('Вы нажали на кнопку!')">Нажми меня</button>
+    <div class="header">
+        <h1>Hamster Combat</h1>
+    </div>
+    <div class="status-bar">
+        <div class="health-bar"></div>
+        <div class="mana-bar"></div>
+    </div>
+    <div class="content">
+        <div class="character"></div>
+        <div class="character"></div>
+    </div>
+    <div class="actions">
+        <button>Attack</button>
+        <button>Defend</button>
+    </div>
 </body>
 </html>
