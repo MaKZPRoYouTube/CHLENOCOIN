@@ -1,70 +1,61 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamster Combat Clone</title>
+    <title>Tapping Game</title>
     <style>
         body {
-            background-color: #333;
-            color: #fff;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background-color: #222;
-            padding: 10px;
             text-align: center;
-        }
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            background-color: #444;
-        }
-        .health-bar, .mana-bar {
-            width: 45%;
-            height: 20px;
-            background-color: #555;
-        }
-        .content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
-        }
-        .character {
-            width: 150px;
-            height: 150px;
-            background-color: #888;
-            margin: 10px;
-        }
-        .actions {
-            text-align: center;
-            margin-top: 20px;
+            background-color: #f4f4f4;
+            padding: 50px;
         }
         button {
-            padding: 10px 20px;
-            margin: 5px;
+            padding: 20px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .progress {
+            font-size: 24px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Hamster Combat</h1>
-    </div>
-    <div class="status-bar">
-        <div class="health-bar"></div>
-        <div class="mana-bar"></div>
-    </div>
-    <div class="content">
-        <div class="character"></div>
-        <div class="character"></div>
-    </div>
-    <div class="actions">
-        <button>Attack</button>
-        <button>Defend</button>
-    </div>
+    <h1>Tap to Earn Points!</h1>
+    <button id="tapButton">Tap!</button>
+    <div class="progress">Progress: <span id="progress">0</span></div>
+
+    <script>
+        const userId = 123456;  // Здесь можно получить реальный user_id через Telegram API
+
+        document.getElementById('tapButton').addEventListener('click', () => {
+            fetch('/update-progress', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_id: userId, increment: 1 }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('progress').textContent = data.progress;
+                }
+            });
+        });
+
+        // Получаем прогресс пользователя при загрузке страницы
+        window.onload = () => {
+            fetch(`/get-progress/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('progress').textContent = data.progress;
+                }
+            });
+        };
+    </script>
 </body>
 </html>
